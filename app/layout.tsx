@@ -22,24 +22,25 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
+      <html lang="en" suppressHydrationWarning className="h-full">
         <body
-          className={ cn (
+          className={cn(
             font1.className,
-            "bg-white dark:bg-[#313338]"
+            "h-full bg-white dark:bg-[#313338]"
           )}
         >
           <ThemeProvider
-          attribute={"class"}
-          defaultTheme="dark"
-          enableSystem
-          storageKey="UniChat">    
-          {children}
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            storageKey="UniChat"
+          >
+            {children}
           </ThemeProvider>
         </body>
       </html>

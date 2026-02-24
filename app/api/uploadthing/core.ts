@@ -1,13 +1,14 @@
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 import { auth } from "@clerk/nextjs/server";
-import { use } from "react";
 
 const f = createUploadthing();
 
-const handleAuth = () =>{
-    const userId = auth();
-    if(!userId) throw new Error("Unortherised");
+const handleAuth = async () =>{
+    const {userId} = await auth();
+    if(!userId) throw new UploadThingError("Unortherised");
+    console.log("authorization passed");
+    
     return {userId: userId};
 }
 
@@ -21,6 +22,9 @@ export const ourFileRouter = {
   .middleware(() => handleAuth())
   .onUploadComplete(()=>{
     console.log("upload successful");
+  }).onUploadError((err:any)=>{
+    console.log(err);
+    
   })
 } satisfies FileRouter;
 

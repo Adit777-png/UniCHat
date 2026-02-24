@@ -25,8 +25,9 @@ const ServerPage = async () => {
     }
     return(
     <>
-     <ServerIdPage />
+    <InitialModal />
      <NavigationSidebar />
+     <ServerIdPage />
     </>);
 }
  
